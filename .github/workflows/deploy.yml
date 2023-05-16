@@ -24,25 +24,38 @@ jobs:
     # 워크플로우 실행 단계를 구성한다.
     steps:
       # Github Actions에서 제공하는 코드를 가져온다.
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       # Github Actions에서 제공하는 Node.js 환경을 구성한다.
-      - uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 16
+
+      - uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: latest
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=${pnpm store path}" >> $GITHUB_OUTPUT
 
       # actions/cache
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install Dependencies
-        # 이전의 cache가 없다면 의존성을 설치합니다.
         # 필요한 종속성을 설치한다.
         run: |
-          npm i -g pnpm
           pnpm i
           pnpm build
 
