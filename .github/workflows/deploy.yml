@@ -42,8 +42,9 @@ jobs:
 
       # Github Pages에 배포하기 위한 설정을 한다.
       - name: Deploy to Github Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: JamesIves/github-pages-deploy-action@4
         with:
           branch: gh-pages
           folder: dist
+          target-folder: .
           token: ${{ secrets.ACCESS_TOKEN }}
