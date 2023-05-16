@@ -24,6 +24,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      # 디버그용: 파일 내용 보기
+      - run: ls -al
+
       # Github Actions에서 제공하는 Node.js 환경을 구성한다.
       - uses: actions/setup-node@v2
         with:
