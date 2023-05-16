@@ -1,0 +1,40 @@
+# Vite 빌드를 위한 빈 워크플로우를 정의한다.
+name: Build and Deploy
+
+# 워크플로우를 실행할 이벤트를 지정한다.
+on:
+  push:
+    branches:
+      - main
+
+# 워크플로우의 실행 단계를 정의한다.
+jobs:
+  build-and-deploy:
+    # 워크플로우 실행에 사용할 런타임 환경을 지정한다.
+    runs-on: ubuntu-latest
+
+    # 빌드 및 배포에 필요한 환경 변수를 설정한다.
+    env:
+      NODE_ENV: production
+      GH_REPOSITORY: ${{ github.repository }}
+
+    # 워크플로우 실행 단계를 구성한다.
+    steps:
+      # Github Actions에서 제공하는 Node.js 환경을 구성한다.
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      # 필요한 종속성을 설치한다.
+      - run: npm install
+
+      # Vite를 사용하여 프로젝트를 빌드한다.
+      - run: npm run build
+
+      # Github Pages에 배포하기 위한 설정을 한다.
+      - name: Deploy to Github Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: dist
+          token: ${{ secrets.ACCESS_TOKEN }}
