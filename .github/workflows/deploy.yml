@@ -32,10 +32,10 @@ jobs:
           node-version: 16
 
       # 필요한 종속성을 설치한다.
-      - run: npm ci
+      - run: yarn install
 
       # Vite를 사용하여 프로젝트를 빌드한다.
-      - run: npm run build
+      - run: yarn build
 
       # Github Pages에 배포하기 위한 설정을 한다.
       - name: Deploy to Github Pages
