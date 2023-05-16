@@ -34,19 +34,16 @@ jobs:
       # actions/cache
       - name: Cache dependencies
         uses: actions/cache@v3
-        id: cache
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install Dependencies
         # 이전의 cache가 없다면 의존성을 설치합니다.
-        if: steps.cache.outputs.cache-hit != 'true'
         # 필요한 종속성을 설치한다.
-        run: yarn install
-
-      # Vite를 사용하여 프로젝트를 빌드한다.
-      - run: yarn build
+        run: |
+          npm ci
+          npm run build
 
       # Github Pages에 배포하기 위한 설정을 한다.
       - name: Deploy to Github Pages
