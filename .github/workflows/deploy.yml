@@ -23,7 +23,7 @@ jobs:
       # Github Actions에서 제공하는 Node.js 환경을 구성한다.
       - uses: actions/setup-node@v2
         with:
-          node-version: "14.x"
+          node-version: "16.x"
 
       # 필요한 종속성을 설치한다.
       - run: npm i -g pnpm@latest
