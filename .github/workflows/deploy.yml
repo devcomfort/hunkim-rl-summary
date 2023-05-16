@@ -33,7 +33,7 @@ jobs:
           node-version: "16.x"
 
       # 필요한 종속성을 설치한다.
-      - run: npm install
+      - run: npm ci
 
       # Vite를 사용하여 프로젝트를 빌드한다.
       - run: npm run build
