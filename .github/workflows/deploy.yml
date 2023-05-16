@@ -34,6 +34,9 @@ jobs:
       # 필요한 종속성을 설치한다.
       - run: yarn install
 
+      # 디버그용: yarn list
+      - run: yarn list
+
       # Vite를 사용하여 프로젝트를 빌드한다.
       - run: yarn build
 
