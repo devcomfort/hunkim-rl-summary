@@ -51,6 +51,4 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
-          target-folder: .
-          repository-name: devcomfort/hunkim-rl-summary
           token: ${{ secrets.ACCESS_TOKEN }}
