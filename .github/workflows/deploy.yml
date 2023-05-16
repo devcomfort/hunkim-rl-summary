@@ -23,6 +23,11 @@ jobs:
       # Github Actions에서 제공하는 코드를 가져온다.
       - uses: actions/checkout@v3
 
+      # Github Actions에서 제공하는 Node.js 환경을 구성한다.
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
       # actions/cache
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -34,15 +39,8 @@ jobs:
       - name: Install Dependencies
         # 이전의 cache가 없다면 의존성을 설치합니다.
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-
-      # Github Actions에서 제공하는 Node.js 환경을 구성한다.
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      # 필요한 종속성을 설치한다.
-      - run: yarn install
+        # 필요한 종속성을 설치한다.
+        run: yarn install
 
       # Vite를 사용하여 프로젝트를 빌드한다.
       - run: yarn build
