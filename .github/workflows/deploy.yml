@@ -23,9 +23,6 @@ jobs:
       # Github Actions에서 제공하는 코드를 가져온다.
       - uses: actions/checkout@v3
 
-      # 디버그용: 파일 내용 보기
-      - run: ls -al
-
       # Github Actions에서 제공하는 Node.js 환경을 구성한다.
       - uses: actions/setup-node@v3
         with:
@@ -33,9 +30,6 @@ jobs:
 
       # 필요한 종속성을 설치한다.
       - run: yarn install
-
-      # 디버그용: yarn list
-      - run: yarn list
 
       # Vite를 사용하여 프로젝트를 빌드한다.
       - run: yarn build
