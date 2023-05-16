@@ -25,6 +25,8 @@ jobs:
         with:
           node-version: "16.x"
 
+      - run: ll
+
       # 필요한 종속성을 설치한다.
       - run: npm install
 
