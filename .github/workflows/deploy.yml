@@ -26,7 +26,7 @@ jobs:
       # actions/cache
       - uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: "**/node_modules"
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       # Github Actions에서 제공하는 Node.js 환경을 구성한다.
