@@ -23,6 +23,12 @@ jobs:
       # Github Actions에서 제공하는 코드를 가져온다.
       - uses: actions/checkout@v3
 
+      # actions/cache
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
       # Github Actions에서 제공하는 Node.js 환경을 구성한다.
       - uses: actions/setup-node@v3
         with:
